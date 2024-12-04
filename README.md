@@ -1,34 +1,14 @@
-# Hang In There
-
-A boilerplate repo. 
-
-## Set Up
-
-1. Fork this repository
-2. Clone down your new, forked repo
-3. `cd` into the repository
-4. Open it in your text editor
-5. Add the instructors as collaborators on the repository
-
-Project spec & rubric can be found [here](https://curriculum.turing.edu/module2/projects/hang-in-there/index)
-
-To view your project:
-
-1. In your terminal, navigate to your project repo
-2. Run the command `open index.html`
-  
-______________________________________________________  
-# README Template  
-Before turning this project in, erase this line and everything above it and fill in the info below.  
-______________________________________________________  
-
 # Hang in There  
 
 ### Abstract:
-[//]: <> (Briefly describe what you built and its features. What problem is the app solving? How does this application solve that problem?)
+[//]: This is a front end app that can show randomized and customizable posters. You can also create a collection of posters by saving and deleting them, including customized posters. This is helping people create a collection of posters and photos alike.
 
 ### Installation Instructions:
-[//]: <> (What steps does a person have to take to get your app cloned down and running?)
+[//]: To clone this app, simply follow this link [Click Me](https://github.com/Jonathan-Atkins/Hang_In_There).
+- On GitHub, navigate to the main page of the repository
+- go to the page of the repository you’d like to clone. Click Clone or download. Copy the URL that pops up. 
+- Use the Git clone command and the URL you copied earlier. 
+<> (What steps does a person have to take to get your app cloned down and running?)
 
 ### Preview of App:
 [//]: <> (Provide ONE gif or screenshot of your application - choose the "coolest" piece of functionality to show off. gifs preferred!)
