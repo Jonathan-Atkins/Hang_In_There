@@ -104,33 +104,33 @@ let savedPosters = [];
 
 let currentPoster;
 
-let mainPosterImage         = document.querySelector('.poster-img');
-let mainPosterTitle         = document.querySelector('.poster-title');
-let mainPosterQuote         = document.querySelector('.poster-quote');
-let mainPosterSection       = document.querySelector('.main-poster');
-let savedPostersSection     = document.querySelector('.saved-posters');
-let posterFormSection       = document.querySelector('.poster-form');
-let savePosterButton        = document.querySelector('.save-poster');
-let showSavedPosterButton   = document.querySelector('.show-saved');
-let showRandomPosterButton  = document.querySelector('.show-random');
-let makeOwnPosterButton     = document.querySelector('.show-form');
-let takeMeBackButton        = document.querySelector('.show-main');
-let customImage             = document.querySelector('#poster-image-url');
-let customTitle             = document.querySelector('#poster-title');
-let customQuote             = document.querySelector('#poster-quote');
-let 
-
-
+let mainPosterImage          = document.querySelector('.poster-img');
+let mainPosterTitle          = document.querySelector('.poster-title');
+let mainPosterQuote          = document.querySelector('.poster-quote');
+let mainPosterSection        = document.querySelector('.main-poster');
+let savedPostersSection      = document.querySelector('.saved-posters');
+let posterFormSection        = document.querySelector('.poster-form');
+let savePosterButton         = document.querySelector('.save-poster');
+let showSavedPosterButton    = document.querySelector('.show-saved');
+let showRandomPosterButton   = document.querySelector('.show-random');
+let makeOwnPosterButton      = document.querySelector('.show-form');
+let takeMeBackButton         = document.querySelector('.show-main');
+let customImage              = document.querySelector('#poster-image-url');
+let customTitle              = document.querySelector('#poster-title');
+let customQuote              = document.querySelector('#poster-quote');
+let createCustomPosterButton = document.querySelector('.make-poster')
 
 // event listeners go here 👇
 
-// savePosterButton.addEventListener('click', savePoster)
-// showSavedPosterButton.addEventListener('click', showSaved)
+savePosterButton.addEventListener('click', savePoster)
 showRandomPosterButton.addEventListener('click', displayRandomPoster)
 makeOwnPosterButton.addEventListener('click', showPosterForm)
 takeMeBackButton.addEventListener('click', takeMeBack)
+createCustomPosterButton.addEventListener('click', CustomPoster)
+showSavedPosterButton.addEventListener('click', showSaved)
 
 // functions and event handlers go here 👇
+
 window.onload = displayRandomPoster
 
 function getRandomIndex(array) {
@@ -159,10 +159,13 @@ function displayRandomPoster() {
 }
 
 
-function showSavedPosters() {
-  mainPosterSection.classList.add('hidden') 
-  savedPostersSection.classList.remove('hidden') 
-  posterFormSection.classList.add('hidden');
+function savePoster() {
+  if (savedPosters.some(poster => poster.id === currentPoster.id)) {
+    window.alert('Already Saved!');
+  } else {
+    savedPosters.push(currentPoster);
+    window.alert('Saved!');
+  }
 }
 
 function showPosterForm() {
@@ -175,4 +178,31 @@ function takeMeBack(){
   mainPosterSection.classList.remove('hidden'); 
   posterFormSection.classList.add('hidden'); 
   savedPostersSection.classList.add('hidden'); 
+}
+function CustomPoster() {
+  event.preventDefault();
+  let newImage = customImage.value;
+  let newTitle = customTitle.value;
+  let newQuote = customQuote.value;
+  
+  if (newImage && newTitle && newQuote){
+
+  mainPosterImage.src = newImage;
+  mainPosterTitle.alt = newTitle;
+  mainPosterTitle.innerHTML = newTitle;
+  mainPosterQuote.innerHTML = newQuote;
+  
+  mainPosterSection.classList.remove('hidden');
+  posterFormSection.classList.add('hidden');
+  } else{
+  };
+  currentPoster = createPoster(newImage, newTitle, newQuote);
+}
+
+function showSaved(){
+ //! When a user clicks on the show Saved Posters Button, 
+  //* We need the main poster to be hidden 
+mainPosterSection.classList.add('hidden'); 
+ //* We need a show all of the pictures that are saved in the savedPosters array
+ savedPostersSection.classList.remove('hidden')
 }
