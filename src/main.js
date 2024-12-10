@@ -223,8 +223,8 @@ let unmotivationalPosters = [
 ];
 
 
-let savedPosters     = [];
-let savedPostersGrid = document.querySelector('.saved-posters-grid');
+let savedPosters              = [];
+let savedPostersGrid          = document.querySelector('.saved-posters-grid');
 let unmotivationalPostersGrid = document.querySelector('.unmotivated-posters-grid');
 
 let currentPoster;
@@ -280,6 +280,16 @@ function createPoster(imageURL, title, quote) {
     quote: quote}
 }
 
+function removeOrAddHidden(queryHide,queryShow,reverse = false){
+  if(reverse = true){
+    queryHide.forEach(query => query.classList.add('hidden'))
+    queryShow.classList.remove('hidden');
+  } else{
+    queryShow.classList.remove('hidden');
+    queryHide.forEach(query => query.classList.add('hidden'))
+  }
+}
+
 function displayRandomPoster() {
   let randomImage = images[getRandomIndex(images)]
   let randomTitle = titles[getRandomIndex(titles)]
@@ -316,55 +326,47 @@ function CustomPoster(event) {
   let newQuote = customQuote.value;
   
   if (newImage && newTitle && newQuote){
-
-  mainPosterImage.src = newImage;
-  mainPosterTitle.alt = newTitle;
-  mainPosterTitle.innerHTML = newTitle;
-  mainPosterQuote.innerHTML = newQuote;
-  
-  mainPosterSection.classList.remove('hidden');
-  posterFormSection.classList.add('hidden');
+    mainPosterImage.src       = newImage;
+    mainPosterTitle.alt       = newTitle;
+    mainPosterTitle.innerHTML = newTitle;
+    mainPosterQuote.innerHTML = newQuote;
+    
+    removeOrAddHidden([posterFormSection],mainPosterSection)
   } else{
+    window.alert('Need All Inputs!')
   };
   currentPoster = createPoster(newImage, newTitle, newQuote);
 }
 
 function showSaved(){
-mainPosterSection.classList.add('hidden'); 
-savedPostersSection.classList.remove('hidden')
+  removeOrAddHidden([mainPosterSection],savedPostersSection,true)
 
-savedPostersGrid.innerHTML = ''
+  savedPostersGrid.innerHTML = ''
 
-savedPosters.forEach(poster =>{
-  let miniPoster = document.createElement('div')
-  miniPoster.classList.add('mini-poster');
+  savedPosters.forEach(poster =>{
+    let miniPoster = document.createElement('div')
+    miniPoster.classList.add('mini-poster');
 
   miniPoster.innerHTML = `
   <img src= "${poster.imageURL}" alt ="${poster.title}">
   <h2>${poster.title}</h2>
   <h4>${poster.quote}</h4>
   `
-    savedPostersGrid.appendChild(miniPoster)
+  savedPostersGrid.appendChild(miniPoster)
   });
 }
 
 function backToMain() {
-  savedPostersSection.classList.add('hidden');
-  mainPosterSection.classList.remove('hidden');
-  showAllUnmotivatedPostersSection.classList.add('hidden');
+  removeOrAddHidden([savedPostersSection,showAllUnmotivatedPostersSection],mainPosterSection)
 }
 
 function takeMeBack() {
-  posterFormSection.classList.add('hidden');
-  savedPostersSection.classList.add('hidden');
-  showAllUnmotivatedPostersSection.classList.add('hidden');
-  mainPosterSection.classList.remove('hidden');
+  removeOrAddHidden([posterFormSection,savedPostersSection,showAllUnmotivatedPostersSection],mainPosterSection, true)
 }
 
 function displayRandomUnmotivationalPoster() {
-  showAllUnmotivatedPostersSection.classList.add('hidden');  // Fix here
-  mainPosterSection.classList.remove('hidden');
-  
+  removeOrAddHidden([showAllUnmotivatedPostersSection],mainPosterSection,true)
+
   let randomPoster = unmotivationalPosters[getRandomIndex(unmotivationalPosters)];
 
   mainPosterImage.src = randomPoster.img_url;
@@ -380,8 +382,7 @@ function displayRandomUnmotivationalPoster() {
 }
 
 function showAllUnmotivatedPosters(){
-  mainPosterSection.classList.add('hidden'); 
-  showAllUnmotivatedPostersSection.classList.remove('hidden')
+  removeOrAddHidden([mainPosterSection],showAllUnmotivatedPostersSection,true)
 
   unmotivationalPostersGrid.innerHTML = ''
   
