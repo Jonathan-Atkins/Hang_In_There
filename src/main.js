@@ -309,8 +309,7 @@ function showPosterForm() {
   savedPostersSection.classList.add('hidden'); 
 }
 
-
-function CustomPoster() {
+function CustomPoster(event) {
   event.preventDefault();
   let newImage = customImage.value;
   let newTitle = customTitle.value;
@@ -404,10 +403,11 @@ function deleteUnmotivationalPosters(event){
   let selectedPoster = event.target.closest('.unmotivated-mini-poster')
   
   let index = Number(selectedPoster.getAttribute('id'))// console.log('See Here',selectedPoster)
-  console.log('Poster Id', selectedPoster.getAttribute('id'))  
   unmotivationalPosters.splice(index,1)
-  console.log('This is the index',index)
-  console.log('This is unmotivational posters',unmotivationalPosters)
 
   showAllUnmotivatedPosters()
 }
+
+// Extentions
+
+
