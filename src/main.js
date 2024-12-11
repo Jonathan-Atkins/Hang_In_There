@@ -264,6 +264,7 @@ getUnmotivatedButton.addEventListener('click', displayRandomUnmotivationalPoster
 showAllUnmotivatedPostersButton.addEventListener('click',showAllUnmotivatedPosters)
 unmotivatedBackToMainButton.addEventListener('click', backToMain);
 showAllUnmotivatedPostersSection.addEventListener('dblclick', deleteUnmotivationalPosters)
+
 // functions and event handlers go here 👇
 
 window.onload = displayRandomPoster
@@ -295,14 +296,13 @@ function displayRandomPoster() {
   let randomTitle = titles[getRandomIndex(titles)]
   let randomQuote = quotes[getRandomIndex(quotes)]
 
-  mainPosterImage.src = randomImage; 
-  mainPosterTitle.alt = randomTitle;
+  mainPosterImage.src       = randomImage; 
+  mainPosterTitle.alt       = randomTitle;
   mainPosterTitle.innerHTML = randomTitle;  
   mainPosterQuote.innerHTML = randomQuote; 
 
   currentPoster = createPoster(randomImage, randomTitle, randomQuote)
 }
-
 
 function savePoster() {
   if (savedPosters.some(poster => poster.id === currentPoster.id)) {
@@ -314,9 +314,7 @@ function savePoster() {
 }
 
 function showPosterForm() {
-  mainPosterSection.classList.add('hidden'); 
-  posterFormSection.classList.remove('hidden'); 
-  savedPostersSection.classList.add('hidden'); 
+  removeOrAddHidden([mainPosterSection,savedPostersSection],posterFormSection,true)
 }
 
 function CustomPoster(event) {
@@ -403,12 +401,8 @@ function showAllUnmotivatedPosters(){
 function deleteUnmotivationalPosters(event){
   let selectedPoster = event.target.closest('.unmotivated-mini-poster')
   
-  let index = Number(selectedPoster.getAttribute('id'))// console.log('See Here',selectedPoster)
+  let index = Number(selectedPoster.getAttribute('id'))
   unmotivationalPosters.splice(index,1)
 
   showAllUnmotivatedPosters()
-}
-
-// Extentions
-
-
+};
